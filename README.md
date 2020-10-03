@@ -151,6 +151,7 @@ To help ensure this plugin is kept updated, new features are added and bugfixes 
     - [verifyPhoneNumber](#verifyphonenumber)
       - [Android](#android-2)
       - [iOS](#ios-2)
+    - [setLanguageCode](#setLanguageCode)
     - [authenticateUserWithEmailAndPassword](#authenticateuserwithemailandpassword)
     - [authenticateUserWithGoogle](#authenticateuserwithgoogle)
       - [Android](#android-3)
@@ -225,11 +226,13 @@ The following plugin variables are used to specify the Firebase SDK versions as 
 - `ANDROID_FIREBASE_CRASHLYTICS_VERSION`
 - `ANDROID_FIREBASE_CRASHLYTICS_NDK_VERSION`
 - `ANDROID_GSON_VERSION`
+- `ANDROID_FIREBASE_PERF_GRADLE_PLUGIN_VERSION`
 See [Specifying Android library versions](#specifying-android-library-versions) for more info.
 
 - `ANDROID_ICON_ACCENT` - sets the default accent color for system notifications. See [Android Notification Color](#android-notification-color) for more info.
 - `ANDROID_FIREBASE_CONFIG_FILEPATH` - sets a custom filepath to `google-services.json` file as a path relative to the project root
     - e.g. `--variable ANDROID_FIREBASE_CONFIG_FILEPATH="resources/android/google-services.json"`
+- `ANDROID_FIREBASE_PERF_GRADLE_PLUGIN_VERSION` - overrides the default version of the [Firebase Performance Monitoring Gradle plugin for Android](https://firebase.google.com/docs/perf-mon/get-started-android?authuser=0#add-perfmon-plugin)
 
 ### iOS only
 - `IOS_STRIP_DEBUG` - prevents symbolification of all libraries included via Cocoapods. See [Strip debug symbols](#strip-debug-symbols) for more info.
@@ -2544,6 +2547,17 @@ You can [set up reCAPTCHA verification for iOS](https://firebase.google.com/docs
 
 This adds the `REVERSED_CLIENT_ID` from the `GoogleService-Info.plist` to the list of custom URL schemes in your Xcode project, so you don't need to do this manually.
 
+### setLanguageCode
+Sets the user-facing language code for auth operations that can be internationalized, such as sendEmailVerification() or verifyPhoneNumber(). This language code should follow the conventions defined by the IETF in BCP47.
+
+**Parameters**:
+- {string} lang - language to change, ex: 'fr' for french
+
+Example usage:
+
+```javascript
+    FirebasePlugin.setLanguageCode('fr'); // will switch to french
+```
 
 ### authenticateUserWithEmailAndPassword
 Authenticates the user with email/password-based user account to obtain a credential that can be used to sign the user in/link to an existing user account/reauthenticate the user.
